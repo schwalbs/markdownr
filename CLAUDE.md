@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-markdownr is a Wails v2 desktop app: Go backend at the repo root, React 19 + TypeScript + Vite frontend in `frontend/`. Still close to the Wails template (recently migrated from Svelte to React).
+markdownr is a Wails v2 desktop app: Go backend at the repo root, React 19 + TypeScript + Vite+ frontend in `frontend/`, managed with bun. Still close to the Wails template (recently migrated from Svelte to React).
 
 ## Commands
 
@@ -12,12 +12,14 @@ Run from repo root:
 - `wails dev` — live development (Vite HMR; browser dev server with Go bindings at http://localhost:34115)
 - `wails build` — production package (output in `build/bin/`)
 
-Run from `frontend/` (Node version in `frontend/.node-version`):
-- `npm run check` — typecheck (`tsc --noEmit`)
-- `npm run lint` — `oxfmt --check && oxlint`
-- `npm run format` — `oxfmt && oxlint --fix`
+Run from `frontend/` (Node version in `frontend/.node-version`; package manager is bun, pinned via `packageManager`):
+- `bun run check` — `vp check`: format check, lint, and type check
+- `bun run lint` — `vp lint`
+- `bun run format` — `vp check --fix`
 
-No test framework is configured yet. ESLint and Prettier were removed in favor of oxlint/oxfmt (config: `frontend/.oxfmtrc.json` — single quotes, JSX single quotes, sorted imports). A husky pre-commit hook runs `lint-staged` (oxfmt on staged files).
+No test framework is configured yet. The toolchain is Vite+ (`vite-plus`, CLI `vp`); `vite` is aliased to `@voidzero-dev/vite-plus-core` via `overrides`. Import from `vite-plus`, not `vite` (enforced by lint). Format (oxfmt), lint (oxlint, type-aware), and staged-file config all live in `frontend/vite.config.ts` (`fmt`, `lint`, `staged` blocks) — there are no separate oxfmt/oxlint/lint-staged configs.
+
+Git hooks: `bun install` runs `vp config` (the `prepare` script), which sets `core.hooksPath` to `frontend/.vite-hooks/_` (generated, gitignored). The committed `frontend/.vite-hooks/pre-commit` runs `vp staged` from `frontend/`.
 
 ## Architecture
 

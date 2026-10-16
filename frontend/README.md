@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-Frontend for the Wails app, built with React and Vite. Formatting and linting use oxfmt and oxlint.
+Frontend for the Wails app, built with React and Vite. Tooling is Vite+ (formatting, linting, and type checks via `vp`).
 
 ## Recommended IDE Setup
 
@@ -8,9 +8,11 @@ Frontend for the Wails app, built with React and Vite. Formatting and linting us
 
 ## Available Scripts
 
-- `npm run dev`: Starts the Vite development server.
-- `npm run build`: Compiles TypeScript and builds the app for production.
-- `npm run preview`: Previews the production build locally.
-- `npm run check`: Typechecks TypeScript files without emitting output.
-- `npm run lint`: Checks formatting and runs linter (`oxfmt` and `oxlint`).
-- `npm run format`: Formats code and auto-fixes lint errors.
+Uses [Vite+](https://viteplus.dev) (`vp`) and bun.
+
+- `bun run dev`: Starts the Vite development server.
+- `bun run build`: Builds the app for production.
+- `bun run preview`: Previews the production build locally.
+- `bun run check`: Checks formatting, lints, and typechecks.
+- `bun run lint`: Runs the linter.
+- `bun run format`: Formats code and auto-fixes lint errors.

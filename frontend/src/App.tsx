@@ -10,7 +10,9 @@ function App() {
   const [name, setName] = useState<string>('');
 
   function greet(): void {
-    Greet(name).then((result) => setResultText(result));
+    Greet(name)
+      .then((result) => setResultText(result))
+      .catch(() => {});
   }
 
   return (
