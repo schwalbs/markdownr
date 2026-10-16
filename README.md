@@ -2,7 +2,7 @@
 
 ## About
 
-This is the official Wails Svelte-TS template.
+This is a Wails app with a React + TypeScript frontend.
 
 ## Live Development
 
