@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Greet } from '../wailsjs/go/main/App.js';
 import logo from './assets/images/logo-universal.png';
 
-import './App.css';
+import styles from './App.module.css';
 
 function App() {
   const [resultText, setResultText] = useState<string>('Please enter your name below 👇');
@@ -15,20 +15,18 @@ function App() {
 
   return (
     <main>
-      <img alt='Wails logo' id='logo' src={logo} />
-      <div className='result' id='result'>
-        {resultText}
-      </div>
-      <div className='input-box' id='input'>
+      <img alt='Wails logo' className={styles.logo} src={logo} />
+      <div className={styles.result}>{resultText}</div>
+      <div>
         <input
           autoComplete='off'
-          className='input'
+          className={styles.input}
           id='name'
           type='text'
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <button className='btn' onClick={greet}>
+        <button className={styles.btn} onClick={greet}>
           Greet
         </button>
       </div>
