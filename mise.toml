@@ -1,0 +1,32 @@
+[tools]
+go = "1.27.1"
+bun = "1.4.3"
+"go:github.com/wailsapp/wails/v2/cmd/wails" = "2.16.0"
+
+[tasks.install]
+description = "Install frontend dependencies (also sets up git hooks)"
+dir = "frontend"
+run = "bun install"
+
+[tasks.dev]
+description = "Run the app with live reload"
+run = "wails dev"
+
+[tasks.build]
+description = "Build the production app into build/bin/"
+run = "wails build"
+
+[tasks.check]
+description = "Format check, lint, and type check the frontend"
+dir = "frontend"
+run = "bun run check"
+
+[tasks.lint]
+description = "Lint the frontend"
+dir = "frontend"
+run = "bun run lint"
+
+[tasks.format]
+description = "Fix frontend formatting and lint issues"
+dir = "frontend"
+run = "bun run format"

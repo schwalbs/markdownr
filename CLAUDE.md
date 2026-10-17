@@ -8,14 +8,17 @@ markdownr is a Wails v2 desktop app: Go backend at the repo root, React 19 + Typ
 
 ## Commands
 
-Run from repo root:
-- `wails dev` — live development (Vite HMR; browser dev server with Go bindings at http://localhost:34115)
-- `wails build` — production package (output in `build/bin/`)
+Tool versions (Go, bun, Wails CLI) are pinned in `mise.toml` at the repo root; `mise install` installs them. There is no Node: bun runs everything, including `vp` (bun shims `node` when it is not on PATH). Run `vp` via `bun run`/`bunx`, not directly.
 
-Run from `frontend/` (Node version in `frontend/.node-version`; package manager is bun, pinned via `packageManager`):
-- `bun run check` — `vp check`: format check, lint, and type check
-- `bun run lint` — `vp lint`
-- `bun run format` — `vp check --fix`
+Top-level tasks are mise tasks (`mise run <task>` from anywhere in the repo; `mise tasks` lists them):
+- `mise run install` — `bun install` in `frontend/` (also sets up git hooks)
+- `mise run dev` — `wails dev`: live development (Vite HMR; browser dev server with Go bindings at http://localhost:34115)
+- `mise run build` — `wails build`: production package (output in `build/bin/`)
+- `mise run check` — `vp check`: format check, lint, and type check
+- `mise run lint` — `vp lint`
+- `mise run format` — `vp check --fix`
+
+The frontend tasks wrap the `frontend/package.json` scripts (`bun run check` etc.), which still work from `frontend/`.
 
 No test framework is configured yet. The toolchain is Vite+ (`vite-plus`, CLI `vp`); `vite` is aliased to `@voidzero-dev/vite-plus-core` via `overrides`. Import from `vite-plus`, not `vite` (enforced by lint). Format (oxfmt), lint (oxlint, type-aware), and staged-file config all live in `frontend/vite.config.ts` (`fmt`, `lint`, `staged` blocks) — there are no separate oxfmt/oxlint/lint-staged configs.
 
